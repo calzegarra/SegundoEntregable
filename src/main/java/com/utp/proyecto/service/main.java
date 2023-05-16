@@ -4,12 +4,21 @@
  */
 package com.utp.proyecto.service;
 
+import com.utp.proyecto.modelo.Nodo;
 import com.utp.proyecto.modelo.Persona;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
- *
+ * Implementar una Lista Enlazada con nodos que se insertan de Manera ordenada 
+ * en relacion a un atributo de la clase lista de acuerdo al tema que le toca (Alumnos)
+ * Las colas y las Pilas deben tener las siguientes funcionalidades:
+ *   - Simulacion de eliminación de objetos
+ *   - Simulacion de insercion de objetos
+ *   - Opción para mostrar los datos completos 
+ * Implementar una cola con Arreglos Estaticos
+ * Implementar una Pila con listas enlazadas simples
+ * Implementar una cola circular con arreglos estaticos (INVESTIGACION)
+ * Implementar una cola con Prioridad con listas enlazadas (INVESTIGACION)
  * @author CHRISTOPHER
  */
 public class main {
@@ -18,16 +27,10 @@ public class main {
         
         // Agregar personas a la lista
         Persona persona1 = new Persona("Reyminson", "Castro", "Cubas",45667889 ,35,"Casado", "Ingenieria de Sistemas");
-        lista.agregarPersona(persona1);
-        lista.mostrarLista();
-        lista = new ListaCircular();
         Persona persona2 = new Persona("Christopher", "Zegarra", "Mendez",999067889 ,33,"Viudo", "Ingenieria de Software");
-        lista.agregarPersona(persona2);
-        /*
-        Persona persona3 = new Persona("Carlos", "Gonzalez", 40);
-        lista.agregarPersona(persona3);*/
         
-        // Mostrar los elementos de la lista
-        lista.mostrarLista();
+        //List<Persona> lp = Arrays.asList(persona1,persona2);
+        List<Nodo> ln = Arrays.asList(lista.agregarPersona(persona1),lista.agregarPersona(persona2));
+        lista.mostrarLista(ln);
     }
 }

@@ -6,9 +6,19 @@ package com.utp.proyecto.service;
 
 import com.utp.proyecto.modelo.Nodo;
 import com.utp.proyecto.modelo.Persona;
-
+import java.util.*;
 /**
- *
+ * Implementar una Lista Enlazada con nodos que se insertan de Manera ordenada 
+ * en relacion a un atributo de la clase lista de acuerdo al tema que le toca (Alumnos)
+ * Las colas y las Pilas deben tener las siguientes funcionalidades:
+ *   - Simulacion de eliminación de objetos
+ *   - Simulacion de insercion de objetos
+ *   - Opción para mostrar los datos completos 
+ * Implementar una cola con Arreglos Estaticos
+ * Implementar una Pila con listas enlazadas simples
+ * Implementar una cola circular con arreglos estaticos (INVESTIGACION)
+ * Implementar una cola con Prioridad con listas enlazadas (INVESTIGACION)
+ * 
  * @author CHRISTOPHER
  */
 public class ListaCircular {
@@ -20,9 +30,8 @@ public class ListaCircular {
     }
     
     // Método para agregar una persona al final de la lista
-    public void agregarPersona(Persona persona) {
+    public Nodo agregarPersona(Persona persona) {
         Nodo nuevoNodo = new Nodo(persona);
-        
         if (inicio == null) {
             // La lista está vacía
             inicio = nuevoNodo;
@@ -33,24 +42,25 @@ public class ListaCircular {
             while (actual.getSiguiente() != inicio) {
                 actual = actual.getSiguiente();
             }
-            
             // Agrega el nuevo nodo al final de la lista
             actual.setSiguiente(nuevoNodo);
             nuevoNodo.setSiguiente(inicio);
         }
+        return inicio;
     }
     
-       public void mostrarLista() {           
-           if (inicio == null) {
+       public void mostrarLista(List<Nodo> listas) {  
+           if (listas.isEmpty()) {
               System.out.println("La lista está vacía."); 
-           }else {
-               Nodo actual = inicio;
-                System.out.println("Nombre: " + actual.getPersona().getNombre());
-                System.out.println("Apellido: " + actual.getPersona().getApePaterno());
-                System.out.println("Edad: " + actual.getPersona().getEdad());
-                System.out.println("-------------------------");
-
-           }
+           }else {    
+               for (Nodo actual : listas) {  
+                   System.out.println("NODO: " + actual.getSiguiente());     
+                   System.out.println("Nombre: " + actual.getPersona().getNombre());               
+                   System.out.println("Apellido: " + actual.getPersona().getApePaterno());      
+                   System.out.println("Edad: " + actual.getPersona().getEdad());               
+                   System.out.println("-------------------------");                                       
+               }               
+           } 
        }
   }
        
