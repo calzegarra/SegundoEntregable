@@ -4,25 +4,15 @@
  */
 package com.utp.proyecto.modelo;
 
-
-public enum EnumAlumno {
- 
-    ALUMNO_1("U20122980","Reyminson", "Castro",27, "Ingenieria de Sistemas", 17.5),
-    ALUMNO_2("U20121971","Christopher", "Zegarra",31, "Ingenieria de Software", 18),
-    ALUMNO_3("U20125718","Camila", "Diaz",25, "Derecho", 19.5),
-    ALUMNO_4("U20120011","Eliane", "Ramos",22, "Arquitectura", 15),
-    ALUMNO_5("U20123133","Carlos", "Pacheco",24, "Arquitectura", 16),
-    ALUMNO_6("U20122261","Renato", "Loayza",24,"Arte", 13.7),
-    ALUMNO_7("U20127133","Manuel", "Quispe",21, "Arte", 13.7);
-    
+public class Alumno implements Comparable<Alumno>{
     private String codigo;
     private String nombre;
     private String apellido; 
     private Integer edad; 
     private String carrera; 
     private double promedio;
-    
-   public String getCodigo() {
+
+    public String getCodigo() {
         return codigo;
     }
 
@@ -70,7 +60,7 @@ public enum EnumAlumno {
         this.promedio = promedio;
     }
 
-    private EnumAlumno(String codigo, String nombre, String apellido, Integer edad, String carrera, double promedio) {
+    public Alumno(String codigo, String nombre, String apellido, Integer edad, String carrera, double promedio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -79,4 +69,18 @@ public enum EnumAlumno {
         this.promedio = promedio;
     }
 
-}
+
+
+    @Override
+    public int compareTo(Alumno otro) {
+        // Ordenar por promedio de forma descendente
+        if (this.promedio < otro.getPromedio()) {
+            return 1;
+        } else if (this.promedio > otro.getPromedio()) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+    
+}       

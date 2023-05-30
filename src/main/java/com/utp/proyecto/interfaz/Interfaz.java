@@ -4,35 +4,38 @@
  */
 package com.utp.proyecto.interfaz;
 
+import com.jtattoo.plaf.texture.TextureLookAndFeel;
 
-import com.utp.proyecto.modelo.Persona;
-import java.util.ArrayList;
-import java.util.List;
+import com.utp.proyecto.modelo.Alumno;
+import com.utp.proyecto.modelo.EnumAlumno;
+import com.utp.proyecto.service.Cola;
+import com.utp.proyecto.service.ColaCircular;
+import com.utp.proyecto.service.ColaPrioritaria;
+import com.utp.proyecto.service.ListaEnlazada;
+import com.utp.proyecto.service.Pila;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author CHRISTOPHER
- */
-public class Interfaz extends javax.swing.JFrame {
-    DefaultTableModel dtm = new DefaultTableModel();    
-    private List<Persona> list;  
-    
+
+public class Interfaz extends javax.swing.JFrame {    
+    DefaultTableModel dtm = new DefaultTableModel();
+    private Cola cola;
+    private Pila pila;    
+    private ColaCircular colaCircular;
+    private ColaPrioritaria colaPrioritaria;
+    private ListaEnlazada listaEnlazada;
+    private Alumno[] calum;    
+    private Alumno[] palum; 
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
         initComponents();
-        String[] titulo = new 
-                String[]{ "Nombre","Apellido Paterno","Apellido Materno","DNI","Edad","Estado Civil","Carrera"};
-        list =  new ArrayList<>();  
-        dtm.setColumnIdentifiers(titulo);
-        //llenarTablaEstatica();
-        tblData.setModel(dtm);    
+        llenarTablaEstatica();
     }
 
     /**
@@ -44,243 +47,587 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtNombre5 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtApeMaterno = new javax.swing.JTextField();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        JTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        btnAgregarCola = new javax.swing.JButton();
+        txtEliminarCola = new javax.swing.JButton();
+        txtMostrarCola = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblData = new javax.swing.JTable();
+        tblColaEst = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JButton();
-        txtNombre = new javax.swing.JTextField();
-        txtApePaterno = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        btnAgregarPila = new javax.swing.JButton();
+        txtEliminarPila = new javax.swing.JButton();
+        txtMostrarPila = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPilaList = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        btnAgregarColaCirc = new javax.swing.JButton();
+        txtEliminarColaCirc = new javax.swing.JButton();
+        txtMostrarColaCirc = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblColaCirc = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblListEnlazadas = new javax.swing.JTable();
+        btnAgregarListEnlInicio = new javax.swing.JButton();
+        txtEliminarListEnlIn = new javax.swing.JButton();
+        txtMostrarListEnl = new javax.swing.JButton();
+        btnAgregarListEnlFin = new javax.swing.JButton();
+        txtEliminarListEnlFin = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        btnAgregarColaPrio = new javax.swing.JButton();
+        txtMostrarColaPrio = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblColaP = new javax.swing.JTable();
+        txtEliminarColaPrio = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         txtEdad = new javax.swing.JTextField();
-        txtDni = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtApellido = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         txtCarrera = new javax.swing.JTextField();
-        cboEstadoCivil = new javax.swing.JComboBox<>();
-        btnActualizar = new javax.swing.JButton();
-        btnMostrar = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtPromedio = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Registro de Alumnos");
-        setAutoRequestFocus(false);
-        setFocusCycleRoot(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Apellido Materno");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Nombre");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Estado Civil");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Carrera");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setText("Registro de Alumnos");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Apellido Paterno");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("Edad");
-
-        txtApeMaterno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        tblData.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tblData);
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("DNI");
-
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarCola.setText("Agregar");
+        btnAgregarCola.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                btnAgregarColaActionPerformed(evt);
             }
         });
 
-        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtEliminarCola.setText("Eliminar");
+        txtEliminarCola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEliminarColaActionPerformed(evt);
+            }
+        });
 
-        txtApePaterno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMostrarCola.setText("Mostrar");
+        txtMostrarCola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMostrarColaActionPerformed(evt);
+            }
+        });
 
-        txtEdad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblColaEst.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Apellido", "Edad", "Carrera", "Promedio Final"
+            }
+        ));
+        jScrollPane1.setViewportView(tblColaEst);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setText("Cola con arreglos estáticos");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAgregarCola)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEliminarCola)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMostrarCola)))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel8)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarCola)
+                    .addComponent(txtEliminarCola)
+                    .addComponent(txtMostrarCola))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+
+        JTabbedPane3.addTab("Cola", jPanel1);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("Pila con listas enlazadas simples");
+
+        btnAgregarPila.setText("Agregar");
+        btnAgregarPila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPilaActionPerformed(evt);
+            }
+        });
+
+        txtEliminarPila.setText("Eliminar");
+        txtEliminarPila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEliminarPilaActionPerformed(evt);
+            }
+        });
+
+        txtMostrarPila.setText("Mostrar");
+        txtMostrarPila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMostrarPilaActionPerformed(evt);
+            }
+        });
+
+        tblPilaList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Apellido", "Edad", "Carrera", "Promedio Final"
+            }
+        ));
+        jScrollPane2.setViewportView(tblPilaList);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnAgregarPila)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEliminarPila)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMostrarPila))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel9)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarPila)
+                    .addComponent(txtEliminarPila)
+                    .addComponent(txtMostrarPila))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+
+        JTabbedPane3.addTab("Pila", jPanel2);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Cola circular con arreglos estáticos");
+
+        btnAgregarColaCirc.setText("Agregar");
+        btnAgregarColaCirc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarColaCircActionPerformed(evt);
+            }
+        });
+
+        txtEliminarColaCirc.setText("Eliminar");
+        txtEliminarColaCirc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEliminarColaCircActionPerformed(evt);
+            }
+        });
+
+        txtMostrarColaCirc.setText("Mostrar");
+        txtMostrarColaCirc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMostrarColaCircActionPerformed(evt);
+            }
+        });
+
+        tblColaCirc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Apellido", "Edad", "Carrera", "Promedio Final"
+            }
+        ));
+        jScrollPane3.setViewportView(tblColaCirc);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnAgregarColaCirc)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtEliminarColaCirc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMostrarColaCirc))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel10)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarColaCirc)
+                    .addComponent(txtEliminarColaCirc)
+                    .addComponent(txtMostrarColaCirc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+
+        JTabbedPane3.addTab("Cola Circular", jPanel3);
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setText("listas enlazadas ordenadas a un atributo");
+
+        tblListEnlazadas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Apellido", "Edad", "Carrera", "Promedio Final"
+            }
+        ));
+        jScrollPane5.setViewportView(tblListEnlazadas);
+
+        btnAgregarListEnlInicio.setText("Agregar al Inicio");
+        btnAgregarListEnlInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarListEnlInicioActionPerformed(evt);
+            }
+        });
+
+        txtEliminarListEnlIn.setText("Eliminar al incio");
+        txtEliminarListEnlIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEliminarListEnlInActionPerformed(evt);
+            }
+        });
+
+        txtMostrarListEnl.setText("Mostrar");
+        txtMostrarListEnl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMostrarListEnlActionPerformed(evt);
+            }
+        });
+
+        btnAgregarListEnlFin.setText("Agregar al final");
+        btnAgregarListEnlFin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarListEnlFinActionPerformed(evt);
+            }
+        });
+
+        txtEliminarListEnlFin.setText("Eliminar al final");
+        txtEliminarListEnlFin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEliminarListEnlFinActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(btnAgregarListEnlInicio)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnAgregarListEnlFin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEliminarListEnlIn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEliminarListEnlFin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMostrarListEnl))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarListEnlInicio)
+                    .addComponent(txtEliminarListEnlIn)
+                    .addComponent(txtMostrarListEnl)
+                    .addComponent(btnAgregarListEnlFin)
+                    .addComponent(txtEliminarListEnlFin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+
+        JTabbedPane3.addTab("Listas Enlazadas", jPanel5);
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setText("Cola prioritaria con listas enlazadas");
+
+        btnAgregarColaPrio.setText("Agregar");
+        btnAgregarColaPrio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarColaPrioActionPerformed(evt);
+            }
+        });
+
+        txtMostrarColaPrio.setText("Mostrar");
+        txtMostrarColaPrio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMostrarColaPrioActionPerformed(evt);
+            }
+        });
+
+        tblColaP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Apellido", "Edad", "Carrera", "Promedio Final"
+            }
+        ));
+        jScrollPane4.setViewportView(tblColaP);
+
+        txtEliminarColaPrio.setText("Eliminar ");
+        txtEliminarColaPrio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEliminarColaPrioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnAgregarColaPrio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEliminarColaPrio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMostrarColaPrio))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel11)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarColaPrio)
+                    .addComponent(txtMostrarColaPrio)
+                    .addComponent(txtEliminarColaPrio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+
+        JTabbedPane3.addTab("Cola Prioritaria", jPanel4);
+
+        jLabel1.setText("Nombre");
+
+        jLabel2.setText("Apellido");
+
         txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtEdadKeyTyped(evt);
             }
         });
 
-        txtDni.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+        jLabel3.setText("Edad");
+
+        jLabel4.setText("Codigo");
+
+        jLabel5.setText("Carrera");
+
+        jLabel6.setText("Promedio");
+
+        txtPromedio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDniKeyTyped(evt);
+                txtPromedioKeyTyped(evt);
             }
         });
 
-        txtCarrera.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        cboEstadoCivil.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONA", "Soltero", "Casado", "Viudo", "Divorciado" }));
-
-        btnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
-
-        btnMostrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnMostrar.setText("Mostrar");
-        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMostrarActionPerformed(evt);
-            }
-        });
-
-        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnRegistrar.setText("Registrar");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Registro de Alumnos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addComponent(jLabel5))
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtApePaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtApeMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(50, 50, 50)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel8)
-                                                .addGap(68, 68, 68))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(27, 27, 27)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtDni)
-                                            .addComponent(cboEstadoCivil, 0, 142, Short.MAX_VALUE)))))
-                            .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(JTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel5)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel8)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6)
-                    .addComponent(txtApePaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtApeMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(txtCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5)
+                    .addComponent(txtCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void txtEliminarColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEliminarColaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
+        if(!cola.desencolar()){      
+          JOptionPane.showMessageDialog(null, "Cola vacia!");   
+        }
+    }//GEN-LAST:event_txtEliminarColaActionPerformed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void txtEliminarPilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEliminarPilaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnActualizarActionPerformed
+        if(!pila.estaVacia()){
+            pila.desapilar();
+        }else{   
+            JOptionPane.showMessageDialog(null, "Pila vacia!");   
+        }
+    }//GEN-LAST:event_txtEliminarPilaActionPerformed
 
-    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+    private void txtEliminarColaCircActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEliminarColaCircActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnMostrarActionPerformed
+        if(!colaCircular.estaVacia()){
+            colaCircular.desencolar();
+        }else{
+           JOptionPane.showMessageDialog(null, "Cola circular vacia!"); 
+        }
+    }//GEN-LAST:event_txtEliminarColaCircActionPerformed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    private void btnAgregarColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarColaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+        if(validarFormulario() == 1){        
+            // Recupero la data del formulario en un objeto            
+            Alumno alumno = new Alumno(txtCodigo.getText(), txtNombre.getText(), txtApellido.getText(), 
+                Integer.parseInt(txtEdad.getText()),txtCarrera.getText(),Double.parseDouble(txtPromedio.getText()));
+            if(!cola.incluir(alumno)){        
+                JOptionPane.showMessageDialog(null, "Cola Saturada! No se puede agregar más registros."); 
+            }       
+        }
+    }//GEN-LAST:event_btnAgregarColaActionPerformed
+
+    private void txtMostrarColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMostrarColaActionPerformed
+        // TODO add your handling code here:
+        String[] titulo = new 
+                String[]{ "Codigo","Nombre","Apellidos","Edad","Carrera","Promedio Final"}; 
+        dtm.setColumnIdentifiers(titulo);
+        calum = new Alumno[cola.cantidad()];
+        limpiarTabla(dtm.getRowCount());
+        calum = cola.mostrarCola();
+        mostrarData(calum);
+        tblColaEst.setModel(dtm); 
+    }//GEN-LAST:event_txtMostrarColaActionPerformed
 
     private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
         // TODO add your handling code here:
+                // TODO add your handling code here:        
         char e = evt.getKeyChar();
         if(!Character.isDigit(e)){
             evt.consume();
@@ -290,17 +637,138 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtEdadKeyTyped
 
-    private void txtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyTyped
+    private void txtPromedioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPromedioKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        if(txtPromedio.getText().length()>= 5){
             evt.consume();
         }
-        if(txtDni.getText().length()>= 8){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtDniKeyTyped
+    }//GEN-LAST:event_txtPromedioKeyTyped
 
+    private void btnAgregarPilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPilaActionPerformed
+        // TODO add your handling code here: 
+        if(validarFormulario() == 1){        
+            // Recupero la data del formulario en un objeto            
+            Alumno alumno = new Alumno(txtCodigo.getText(), txtNombre.getText(), txtApellido.getText(), 
+                Integer.parseInt(txtEdad.getText()),txtCarrera.getText(),Double.parseDouble(txtPromedio.getText()));
+            pila.apilar(alumno);    
+        }       
+    }//GEN-LAST:event_btnAgregarPilaActionPerformed
+
+    private void txtMostrarPilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMostrarPilaActionPerformed
+        // TODO add your handling code here:   
+        String[] titulo = new 
+                String[]{ "Codigo","Nombre","Apellidos","Edad","Carrera","Promedio Final"}; 
+        limpiarTabla(dtm.getRowCount());
+        dtm.setColumnIdentifiers(titulo);
+        mostrarData(pila.mostrarPilaEnNodo());
+        tblPilaList.setModel(dtm); 
+        
+    }//GEN-LAST:event_txtMostrarPilaActionPerformed
+
+    private void txtMostrarColaCircActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMostrarColaCircActionPerformed
+        // TODO add your handling code here:
+        Alumno[] alum = colaCircular.mostrarRegistrosEnCola();
+        if(alum.length != 0){  
+            String[] titulo = new             
+                    String[]{ "Codigo","Nombre","Apellidos","Edad","Carrera","Promedio Final"};   
+            limpiarTabla(dtm.getRowCount());
+            dtm.setColumnIdentifiers(titulo);
+            mostrarData(alum);
+            tblColaCirc.setModel(dtm);           
+        }
+    }//GEN-LAST:event_txtMostrarColaCircActionPerformed
+
+    private void btnAgregarColaCircActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarColaCircActionPerformed
+        // TODO add your handling code here:
+        if(validarFormulario() == 1){        
+            // Recupero la data del formulario en un objeto            
+            Alumno alumno = new Alumno(txtCodigo.getText(), txtNombre.getText(), txtApellido.getText(), 
+                Integer.parseInt(txtEdad.getText()),txtCarrera.getText(),Double.parseDouble(txtPromedio.getText()));
+            if(!colaCircular.encolar(alumno)){        
+                JOptionPane.showMessageDialog(null, "Cola Saturada! No se puede agregar más registros."); 
+            }       
+        }
+    }//GEN-LAST:event_btnAgregarColaCircActionPerformed
+
+    private void btnAgregarColaPrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarColaPrioActionPerformed
+        // TODO add your handling code here:
+        if(validarFormulario() == 1){        
+            // Recupero la data del formulario en un objeto            
+            Alumno alumno = new Alumno(txtCodigo.getText(), txtNombre.getText(), txtApellido.getText(), 
+                Integer.parseInt(txtEdad.getText()),txtCarrera.getText(),Double.parseDouble(txtPromedio.getText()));
+            colaPrioritaria.encolado(alumno);      
+        }        
+    }//GEN-LAST:event_btnAgregarColaPrioActionPerformed
+
+    private void txtMostrarColaPrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMostrarColaPrioActionPerformed
+        // TODO add your handling code here:      
+        String[] titulo = new 
+                String[]{ "Codigo","Nombre","Apellidos","Edad","Carrera","Promedio Final"}; 
+        dtm.setColumnIdentifiers(titulo);
+        limpiarTabla(dtm.getRowCount());
+        mostrarData(colaPrioritaria.mostrarCola());
+        tblColaP.setModel(dtm);      
+    }//GEN-LAST:event_txtMostrarColaPrioActionPerformed
+
+    private void txtEliminarColaPrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEliminarColaPrioActionPerformed
+        // TODO add your handling code here:
+        if(!colaPrioritaria.estaVacia()){
+            colaPrioritaria.desencolar();
+        }else{
+           JOptionPane.showMessageDialog(null, "Cola prioritaria vacia!"); 
+        }
+    }//GEN-LAST:event_txtEliminarColaPrioActionPerformed
+
+    private void btnAgregarListEnlInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarListEnlInicioActionPerformed
+        // TODO add your handling code here:
+         if(validarFormulario() == 1){        
+            // Recupero la data del formulario en un objeto            
+            Alumno alumno = new Alumno(txtCodigo.getText(), txtNombre.getText(), txtApellido.getText(), 
+                Integer.parseInt(txtEdad.getText()),txtCarrera.getText(),Double.parseDouble(txtPromedio.getText()));
+            listaEnlazada.insertarInicialOrdenado(alumno);      
+        }        
+    }//GEN-LAST:event_btnAgregarListEnlInicioActionPerformed
+
+    private void txtEliminarListEnlInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEliminarListEnlInActionPerformed
+        // TODO add your handling code here:
+               
+        if(!listaEnlazada.eliminaNodoxInicio()){      
+          JOptionPane.showMessageDialog(null, "Cola vacia!");   
+        } 
+    }//GEN-LAST:event_txtEliminarListEnlInActionPerformed
+
+    private void txtMostrarListEnlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMostrarListEnlActionPerformed
+        // TODO add your handling code here:
+        String[] titulo = new 
+                String[]{ "Codigo","Nombre","Apellidos","Edad","Carrera","Promedio Final"}; 
+        dtm.setColumnIdentifiers(titulo);
+        limpiarTabla(dtm.getRowCount());
+        mostrarData(listaEnlazada.mostrarListaEnlazada());
+        tblListEnlazadas.setModel(dtm);         
+    }//GEN-LAST:event_txtMostrarListEnlActionPerformed
+
+    private void btnAgregarListEnlFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarListEnlFinActionPerformed
+        // TODO add your handling code here: 
+        if(validarFormulario() == 1){        
+            // Recupero la data del formulario en un objeto            
+            Alumno alumno = new Alumno(txtCodigo.getText(), txtNombre.getText(), txtApellido.getText(), 
+                Integer.parseInt(txtEdad.getText()),txtCarrera.getText(),Double.parseDouble(txtPromedio.getText()));
+            listaEnlazada.insertarFinalOrdenado(alumno);      
+        }          
+    }//GEN-LAST:event_btnAgregarListEnlFinActionPerformed
+
+    private void txtEliminarListEnlFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEliminarListEnlFinActionPerformed
+        // TODO add your handling code here:
+        if(!listaEnlazada.eliminaNodoxFinal()){      
+          JOptionPane.showMessageDialog(null, "Cola vacia!");   
+        } 
+    }//GEN-LAST:event_txtEliminarListEnlFinActionPerformed
+    
+    private void limpiarTabla(Integer conteo){    
+        for (int i = conteo- 1; i > -1; i--) {           
+            dtm.removeRow(i);     
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -330,19 +798,89 @@ public class Interfaz extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            public void run() {       
+                try {      
+                 UIManager.setLookAndFeel(new TextureLookAndFeel());
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new Interfaz().setVisible(true);
             }
         });
     }
 
+    private void llenarTablaEstatica(){
+       colaCircular = new ColaCircular(EnumAlumno.values().length);
+       colaPrioritaria = new ColaPrioritaria();
+       listaEnlazada = new ListaEnlazada();
+       cola = new Cola(EnumAlumno.values().length + 2);
+       pila = new Pila();
+       palum = new Alumno[EnumAlumno.values().length + 2];
+       calum = new Alumno[EnumAlumno.values().length + 2];
+       int i = 0;
+       for (EnumAlumno a : EnumAlumno.values()) {
+            Alumno al = new Alumno(a.getCodigo(), a.getNombre(),a.getApellido(),
+            a.getEdad(), a.getCarrera(), a.getPromedio());
+            cola.incluir(al);
+            pila.apilar(al);
+            colaPrioritaria.encolar(al);
+            colaCircular.encolar(al);
+            listaEnlazada.insertarInicialOrdenado(al);
+            i++;    
+       }
+    }
+        
+    private void mostrarData(Alumno[] alum){
+       for (Alumno a : alum) {
+           if(a != null){              
+               dtm.addRow(new Object[]{a.getCodigo(), a.getNombre(),a.getApellido()      
+                       ,a.getEdad(), a.getCarrera(), a.getPromedio()});           
+           }else{             
+               dtm.addRow(new Object[]{"","","","", "",""});
+           }
+       }
+    }
+    
+    private int validarFormulario(){      
+        if (txtCodigo.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar el código del alumno"); 
+            return -1;
+        }          
+        if (txtNombre.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar el nombre del alumno");
+            return -1;
+        }     
+        if (txtApellido.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar el apellido del alumno"); 
+            return -1;
+        }                          
+        if (txtEdad.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar la edad del alumno"); 
+            return -1;
+        }                               
+        if (txtCarrera.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar la carrera del alumno"); 
+            return -1;
+        }
+        if (txtPromedio.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar el promedio final de las notas"); 
+            return -1;
+        }
+        return 1;
+    }
+            
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnMostrar;
-    private javax.swing.JButton btnRegistrar;
-    private javax.swing.JComboBox<String> cboEstadoCivil;
+    private javax.swing.JTabbedPane JTabbedPane3;
+    private javax.swing.JButton btnAgregarCola;
+    private javax.swing.JButton btnAgregarColaCirc;
+    private javax.swing.JButton btnAgregarColaPrio;
+    private javax.swing.JButton btnAgregarListEnlFin;
+    private javax.swing.JButton btnAgregarListEnlInicio;
+    private javax.swing.JButton btnAgregarPila;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -350,14 +888,40 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblData;
-    private javax.swing.JTextField txtApeMaterno;
-    private javax.swing.JTextField txtApePaterno;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable tblColaCirc;
+    private javax.swing.JTable tblColaEst;
+    private javax.swing.JTable tblColaP;
+    private javax.swing.JTable tblListEnlazadas;
+    private javax.swing.JTable tblPilaList;
+    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCarrera;
-    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtEdad;
+    private javax.swing.JButton txtEliminarCola;
+    private javax.swing.JButton txtEliminarColaCirc;
+    private javax.swing.JButton txtEliminarColaPrio;
+    private javax.swing.JButton txtEliminarListEnlFin;
+    private javax.swing.JButton txtEliminarListEnlIn;
+    private javax.swing.JButton txtEliminarPila;
+    private javax.swing.JButton txtMostrarCola;
+    private javax.swing.JButton txtMostrarColaCirc;
+    private javax.swing.JButton txtMostrarColaPrio;
+    private javax.swing.JButton txtMostrarListEnl;
+    private javax.swing.JButton txtMostrarPila;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre5;
+    private javax.swing.JTextField txtPromedio;
     // End of variables declaration//GEN-END:variables
 }

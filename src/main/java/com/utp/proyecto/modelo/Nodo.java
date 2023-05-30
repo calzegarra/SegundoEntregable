@@ -4,26 +4,22 @@
  */
 package com.utp.proyecto.modelo;
 
-/**
- *
- * @author CHRISTOPHER
- */
 public class Nodo {
-    private Persona persona;
+    private Alumno alumno;
     private Nodo siguiente;
     
-    public Nodo(Persona persona) {
-        this.persona = persona;
+    public Nodo(Alumno alumno) {
+        this.alumno = alumno;
         this.siguiente = null;
     }
     
     // Métodos getter y setter
-    public Persona getPersona() {
-        return persona;
+    public Alumno getAlumno() {
+        return alumno;
     }
     
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
     
     public Nodo getSiguiente() {
